@@ -1,0 +1,9 @@
+Package: openCodeR
+Title: An Open Question Coder
+Version: 0.0.0.9000
+Authors@R: person("Mickael", "Temporão", email = "mickael.temporao@ulaval1.ca", role = c("aut", "cre"))
+Description: An easy tool to recode open questions
+Depends: R (>= 3.4.1)
+License: MIT
+Encoding: UTF-8
+LazyData: true
