@@ -5,7 +5,7 @@
 # Description:  TODO: (write me)
 # Version:      0.0.0.000
 # Created:      2017-09-14 13:34:07
-# Modified:     2017-09-15 04:42:39
+# Modified:     2017-09-15 04:46:27
 # Author:       Mickael Temporão < mickael.temporao.1 at ulaval.ca >
 # ------------------------------------------------------------------------------
 # Copyright (C) 2017 Mickael Temporão
@@ -13,7 +13,7 @@
 # ------------------------------------------------------------------------------
 promptUser <- function(raw_dict,
                        programs_raw = "programs_raw",
-                       groups = "categories.json") {
+                       groups = "groups.json") {
   suppressMessages(
                    require(tidyverse)
                    )
