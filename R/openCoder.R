@@ -5,11 +5,11 @@
 # Description:  TODO: (write me)
 # Version:      0.0.0.000
 # Created:      2017-09-14 13:34:07
-# Modified:     2017-09-15 04:37:01
+# Modified:     2017-09-15 04:42:39
 # Author:       Mickael Temporão < mickael.temporao.1 at ulaval.ca >
 # ------------------------------------------------------------------------------
 # Copyright (C) 2017 Mickael Temporão
-# Licensed under the GPL-2 < https://www.gnu.org/licenses/gpl-2.0.txt >
+# Licensed under the MIT < https://https://opensource.org/licenses/MIT >
 # ------------------------------------------------------------------------------
 promptUser <- function(raw_dict,
                        programs_raw = "programs_raw",
