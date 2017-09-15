@@ -5,18 +5,12 @@
 # Description:  TODO: (write me)
 # Version:      0.0.0.000
 # Created:      2017-09-14 13:34:07
-# Modified:     2017-09-15 04:32:56
+# Modified:     2017-09-15 04:37:01
 # Author:       Mickael Temporão < mickael.temporao.1 at ulaval.ca >
 # ------------------------------------------------------------------------------
 # Copyright (C) 2017 Mickael Temporão
 # Licensed under the GPL-2 < https://www.gnu.org/licenses/gpl-2.0.txt >
 # ------------------------------------------------------------------------------
-readCharacter <- function() {
-  n <- readline(prompt="Input value: ")
-  return(as.character(n))
-}
-
-
 promptUser <- function(raw_dict,
                        programs_raw = "programs_raw",
                        groups = "categories.json") {
@@ -29,6 +23,12 @@ promptUser <- function(raw_dict,
   input_coding <- menu(names(programs),
                       title = "Choose a coding group")
   clean_codes <- programs[[input_coding]]
+
+
+  # readCharacter <- function() {
+  #   n <- readline(prompt="Input value: ")
+  #   return(as.character(n))
+  # }
 
   # message("Enter the name of the coded variable: (e.g. v1):")
   # output_var <- readCharacter()
@@ -50,7 +50,8 @@ promptUser <- function(raw_dict,
   test <- sum(is.na(raw_dict[[output_var]]))
 
   cnt <- 0
-  while(test>0) {
+
+  while (test > 0) {
     # Get current progress
     coded <- !is.na(raw_dict[[output_var]])
     progress <- sum(coded)/nrow(raw_dict)
