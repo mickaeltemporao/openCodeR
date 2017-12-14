@@ -9,7 +9,7 @@
 #' @importFrom qdap qprep
 #' @importFrom qdap bag_o_words
 #' @examples
-#' char_fix("I like breer")
+#' char_fix("I llIKe breer")
 char_fix <- function (x) {
 
   x <- str_replace_all(x, "[^[:graph:]]", " ")
