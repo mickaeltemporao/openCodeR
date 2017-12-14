@@ -2,9 +2,19 @@
 #' param raw_input character vector containing the column name of the variable
 #' to recode
 #' importFrom jsonlite fromJSON
-open_code <- function(raw_dict,
-                      raw_input = "programs_raw",
+open_code <- function(input_csv,
+                      raw_dict,
+
                       groups    = "groups.json") {
+
+  test_csv <- try(read_csv(input_csv, n_max = 5), silent = TRUE)
+
+  if(class(test_csv) == "try-error") {
+    stop(sprintf("%s needs to be a csv file!", input_csv))
+  }
+
+  # chose variable
+  raw_input = "programs_raw",
 
   groups <- fromJSON(groups)
 
