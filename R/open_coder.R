@@ -1,4 +1,7 @@
 #' Open Coder
+#' param input_csv character string with the path to the csv file to recode
+#' param raw_dict TODO:
+#' param groups character string with the path to a json groups file
 #' param raw_input character vector containing the column name of the variable
 #' to recode
 #' importFrom jsonlite fromJSON
