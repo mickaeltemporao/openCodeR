@@ -3,21 +3,31 @@
 """Main module."""
 import pandas as pd
 import numpy as np
+import os
+import re
+
 from pick import pick
 
-raw_data_path = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv"
 
-data = pd.read_csv(raw_data_path)
+def prompt_col(input_data, title = "Please select the column name of the variable to recode:"):
+    """
+    Prompts the user to enter the column name of the variables that
+    needs to be recoded.
 
-def prompt_col(data, title = "Please select the column name to recode:"):
-    options = data.columns.tolist()
+    """
+    options = input_data.columns.tolist()
     option, index = pick(options, title)
     return option
 
 
-def make_data(data, selected_column):
+def make_data(input_data, var_to_clean):
+    """
+    Creates a dictionary of key value pairs to be recoded.
+
+    """
+
     output = (
-        data[selected_column]
+        input_data[var_to_clean]
             .str.strip()
             .str.lower()
             .value_counts()
@@ -29,29 +39,60 @@ def make_data(data, selected_column):
 
 
 def get_groups(group_file):
+    """
+    Prompts the user to enter de column name of the group variable to use.
+
+    """
     df_tmp = pd.read_csv(group_file)
-    option = prompt_col(data=df_tmp, title="Please select the group codings:")
-    return df_tmp[option].tolist()
+    option = prompt_col(input_data=df_tmp, title="Select the coding group id:")
+    return option, list(set(df_tmp[option].tolist()))
 
 
-group_file = raw_data_path
-groups = get_groups(group_file)
-selected_column = prompt_col(data)
-tmp_data = make_data(data, selected_column)
+def dic_lookup(input_file, var_to_clean, group_id):
+    """
+    Tries to load the coding dictionary or creates one when there is none.
 
-current_pct = 1-tmp_data.clean.isna().sum()/tmp_data.shape[0]
-
-while current_pct < 1:
-    tmp_id = tmp_data[tmp_data.clean.isna()]['count'].idxmax()
-    title = (
-        """
-        {}% Complete
-        Please select group for:
-          - {}
-        """.format(round(current_pct*100, 2), tmp_data.iloc[tmp_id, 0])
+    """
+    root = re.sub(".csv", "", input_file)
+    file_name = (
+        root + "_" + var_to_clean + "_to_" + group_id + "_" + "codes.csv"
     )
-    options = groups
-    option, index = pick(options, title)
-    tmp_data.iloc[tmp_id, 2] = option
-    tmp_data.iloc[tmp_id, 2] = option
-    current_pct = 1-tmp_data.clean.isna().sum()/tmp_data.shape[0]
+    try:
+        output = pd.read_csv(file_name)
+    except FileNotFoundError:
+        output = make_data(input_data=input_data, var_to_clean=var_to_clean)
+        output.to_csv(file_name, index=False)
+    return file_name, output
+
+
+def open_coder(input_file = "mtcars.csv", group_file = "group_labels.csv"):
+    input_data = pd.read_csv(input_file)
+    group_id, group_labels = get_groups(group_file)
+    var_to_clean = prompt_col(input_data)
+    file_path, dataset = dic_lookup(input_file, var_to_clean, group_id)
+
+    current_pct = 1-dataset.clean.isna().sum()/dataset.shape[0]
+
+    save_count = 0
+    while current_pct < 1:
+        tmp_id = dataset[dataset.clean.isna()]['count'].idxmax()
+        title = (
+            """
+            {}% Complete
+            Please select group for:
+              - {}
+            """.format(round(current_pct*100, 2), dataset.iloc[tmp_id, 0])
+        )
+        options = group_labels
+        option, index = pick(options, title)
+        dataset.iloc[tmp_id, 2] = option
+        dataset.iloc[tmp_id, 2] = option
+        current_pct = 1-dataset.clean.isna().sum()/dataset.shape[0]
+
+        save_count += 1
+        if save_count == 10:
+            dataset.to_csv(file_path, index = False)
+            save_count = 0
+    if current_pct == 1:
+        print("Bitondo's!!")
+        dataset.to_csv(file_path, index = False)
