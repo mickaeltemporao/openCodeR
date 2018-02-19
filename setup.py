@@ -35,7 +35,7 @@ setup(
     packages=find_packages(include=['open_codex']),
     entry_points={
         'console_scripts': [
-            'open_codex=open_codex.cli:main',
+            'codex=open_codex.cli:cli',
         ],
     },
     include_package_data=True,

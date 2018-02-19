@@ -20,12 +20,13 @@ def prompt_col(input_data, title = "Please select the column name of the variabl
     return option
 
 
-def make_data(input_data, var_to_clean):
+def make_data(input_file, var_to_clean):
     """
     Creates a dictionary of key value pairs to be recoded.
 
     """
 
+    input_data = pd.read_csv(input_file)
     output = (
         input_data[var_to_clean]
             .str.strip()
@@ -60,12 +61,30 @@ def dic_lookup(input_file, var_to_clean, group_id):
     try:
         output = pd.read_csv(file_name)
     except FileNotFoundError:
-        output = make_data(input_data=input_data, var_to_clean=var_to_clean)
+        output = make_data(input_file=input_file, var_to_clean=var_to_clean)
         output.to_csv(file_name, index=False)
     return file_name, output
 
 
 def open_codex(input_file = "mtcars.csv", group_file = "group_labels.csv"):
+    """
+    Recodes a column of a csv file to other categories defined by the group
+    file (see group_labels.csv for an example file).
+
+    Parameters
+    ----------
+    input_file: string
+        The path to the raw csv file with the raw variables to recode.
+
+    group_file: string
+        The path to the file containing the different group recoding categories.
+
+    Returns
+    -------
+        A .csv file is saved every 10 entries. The file will be located next
+        to the original raw dataset.
+    """
+
     input_data = pd.read_csv(input_file)
     group_id, group_labels = get_groups(group_file)
     var_to_clean = prompt_col(input_data)
@@ -94,5 +113,5 @@ def open_codex(input_file = "mtcars.csv", group_file = "group_labels.csv"):
             dataset.to_csv(file_path, index = False)
             save_count = 0
     if current_pct == 1:
-        print("Bitondo's!!")
+        print("\n\n    Bitondo's!!\n\n")
         dataset.to_csv(file_path, index = False)
