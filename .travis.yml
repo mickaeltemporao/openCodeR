@@ -25,5 +25,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: mickaeltemporao/opencoder
+    repo: mickaeltemporao/open_codex
     python: 3.6

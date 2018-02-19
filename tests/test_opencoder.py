@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `opencoder` package."""
+"""Tests for `open_codex` package."""
 
 
 import unittest
 from click.testing import CliRunner
 
-from opencoder import opencoder
-from opencoder import cli
+from open_codex import open_codex
+from open_codex import cli
 
 
 class TestOpencoder(unittest.TestCase):
-    """Tests for `opencoder` package."""
+    """Tests for `open_codex` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""
@@ -28,7 +28,7 @@ class TestOpencoder(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'opencoder.cli.main' in result.output
+        assert 'open_codex.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output

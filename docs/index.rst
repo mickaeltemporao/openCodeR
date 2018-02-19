@@ -1,4 +1,4 @@
-Welcome to openCoder's documentation!
+Welcome to open_codex's documentation!
 ======================================
 
 .. toctree::

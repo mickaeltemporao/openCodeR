@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=opencoder
+set SPHINXPROJ=open_codex
 
 if "%1" == "" goto help
 

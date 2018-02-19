@@ -25,24 +25,24 @@ test_requirements = [
 ]
 
 setup(
-    name='opencoder',
+    name='open_codex',
     version='0.1.0',
     description="An python tool to recode open-ended survey questions.",
     long_description=readme + '\n\n' + history,
     author="Mickael Temporão",
     author_email='mickael.temporao.1@ulaval.ca',
-    url='https://github.com/mickaeltemporao/opencoder',
-    packages=find_packages(include=['opencoder']),
+    url='https://github.com/mickaeltemporao/open_codex',
+    packages=find_packages(include=['open_codex']),
     entry_points={
         'console_scripts': [
-            'opencoder=opencoder.cli:main',
+            'open_codex=open_codex.cli:main',
         ],
     },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='opencoder',
+    keywords='open_codex',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

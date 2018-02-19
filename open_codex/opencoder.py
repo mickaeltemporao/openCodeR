@@ -65,7 +65,7 @@ def dic_lookup(input_file, var_to_clean, group_id):
     return file_name, output
 
 
-def open_coder(input_file = "mtcars.csv", group_file = "group_labels.csv"):
+def open_codex(input_file = "mtcars.csv", group_file = "group_labels.csv"):
     input_data = pd.read_csv(input_file)
     group_id, group_labels = get_groups(group_file)
     var_to_clean = prompt_col(input_data)

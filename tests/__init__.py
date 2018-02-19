@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-"""Unit test package for opencoder."""
+"""Unit test package for open_codex."""

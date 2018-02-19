@@ -1,16 +1,16 @@
-=========
-openCoder
-=========
+==========
+Open Codex
+==========
 
 
-.. image:: https://img.shields.io/pypi/v/opencoder.svg
-        :target: https://pypi.python.org/pypi/opencoder
+.. image:: https://img.shields.io/pypi/v/open_codex.svg
+        :target: https://pypi.python.org/pypi/open_codex
 
-.. image:: https://img.shields.io/travis/mickaeltemporao/opencoder.svg
-        :target: https://travis-ci.org/mickaeltemporao/opencoder
+.. image:: https://img.shields.io/travis/mickaeltemporao/open_codex.svg
+        :target: https://travis-ci.org/mickaeltemporao/open_codex
 
-.. image:: https://readthedocs.org/projects/opencoder/badge/?version=latest
-        :target: https://opencoder.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/open_codex/badge/?version=latest
+        :target: https://open_codex.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
@@ -20,7 +20,7 @@ An python tool to recode open-ended survey questions.
 
 
 * Free software: MIT license
-* Documentation: https://opencoder.readthedocs.io.
+* Documentation: https://open_codex.readthedocs.io.
 
 
 Features

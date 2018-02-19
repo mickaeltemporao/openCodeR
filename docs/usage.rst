@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use openCoder in a project::
+To use open_codex in a project::
 
-    import opencoder
+    import open_codex
