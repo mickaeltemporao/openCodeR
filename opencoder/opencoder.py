@@ -23,9 +23,9 @@ def make_data(data, selected_column):
             .value_counts()
             .reset_index()
     )
-    output.columns = ['key', 'count']
-    output['value'] = np.nan
-    return output.sort_values(by=['count','key']).reset_index(drop=True)
+    output.columns = ['raw', 'count']
+    output['clean'] = np.nan
+    return output.sort_values(by=['count','raw']).reset_index(drop=True)
 
 
 def get_groups(group_file):
@@ -34,16 +34,24 @@ def get_groups(group_file):
     return df_tmp[option].tolist()
 
 
+group_file = raw_data_path
 groups = get_groups(group_file)
 selected_column = prompt_col(data)
 tmp_data = make_data(data, selected_column)
 
-current_pct = 1-tmp_data.value.isna().sum()/tmp_data.shape[0]
+current_pct = 1-tmp_data.clean.isna().sum()/tmp_data.shape[0]
 
 while current_pct < 1:
-    current = tmp_data[tmp_data.value.isna()].
-    title = 'Please group for {}your favorite programming language: '
-
-    options = ['Java', 'JavaScript', 'Python', 'PHP', 'C++', 'Erlang', 'Haskell']
-    options = df.cyl.unique().tolist()
+    tmp_id = tmp_data[tmp_data.clean.isna()]['count'].idxmax()
+    title = (
+        """
+        {}% Complete
+        Please select group for:
+          - {}
+        """.format(round(current_pct*100, 2), tmp_data.iloc[tmp_id, 0])
+    )
+    options = groups
     option, index = pick(options, title)
+    tmp_data.iloc[tmp_id, 2] = option
+    tmp_data.iloc[tmp_id, 2] = option
+    current_pct = 1-tmp_data.clean.isna().sum()/tmp_data.shape[0]
