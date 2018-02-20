@@ -28,13 +28,17 @@ These instructions will get you a copy of the project up and running
 on your local machine for development and testing purposes.
 The package can be built and explored using the cli.
 
-Installation
-~~~~~~~~~~~~
+Requirements & Installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 OS X & Linux::
 
+    brew install pipenv
     git clone https://github.com/mickaeltemporao/open_codex
     cd open_codex
+    pipenv --three
+    pipenv shell
+    pipenv install
     make install
 
 Features
