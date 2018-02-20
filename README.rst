@@ -22,11 +22,27 @@ An python tool to recode open-ended survey questions.
 * Free software: MIT license
 * Documentation: https://open_codex.readthedocs.io.
 
+Getting Started
+---------------
+These instructions will get you a copy of the project up and running
+on your local machine for development and testing purposes.
+The package can be built and explored using the cli.
+
+Installation
+~~~~~~~~~~~~
+
+OS X & Linux::
+
+    git clone https://github.com/mickaeltemporao/open_codex
+    cd open_codex
+    make install
 
 Features
---------
+~~~~~~~~
 
-* TODO
+To recode a variable run::
+
+    codex recode --i=path/to/input_file.csv --g=path/to/new_groups.csv
 
 Credits
 -------
