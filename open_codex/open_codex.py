@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """Main module."""
-import pandas as pd
-import numpy as np
 import os
 import re
+import json
+import pandas as pd
+import numpy as np
 
 from pick import pick
 
@@ -66,7 +67,7 @@ def dic_lookup(input_file, var_to_clean, group_id):
     return file_name, output
 
 
-def open_codex(input_file = "mtcars.csv", group_file = "group_labels.csv"):
+def open_codex(input_file="mtcars.csv", group_file="group_labels.csv"):
     """
     Recodes a column of a csv file to other categories defined by the group
     file (see group_labels.csv for an example file).
@@ -102,10 +103,26 @@ def open_codex(input_file = "mtcars.csv", group_file = "group_labels.csv"):
               - {}
             """.format(round(current_pct*100, 2), dataset.iloc[tmp_id, 0])
         )
-        options = group_labels
+        options = group_labels.copy()
+        multi_label = '_  Multi-choice'
+        done_label = '_  Done'
+        options.append(multi_label)
         option, index = pick(options, title)
-        dataset.iloc[tmp_id, 2] = option
-        dataset.iloc[tmp_id, 2] = option
+
+        if option == multi_label:
+            tmp_choice = []
+            tmp_options = options.copy()
+            tmp_options.remove(multi_label)
+            tmp_options.append(done_label)
+
+            while option == multi_label:
+                tmp_option, index = pick(tmp_options, title)
+                tmp_choice.append(tmp_option)
+                if tmp_option == done_label:
+                    tmp_options.remove(done_label)
+                    option = tmp_options
+
+        dataset.iloc[tmp_id, 2] = ', '.join(option)
         current_pct = 1-dataset.clean.isna().sum()/dataset.shape[0]
 
         save_count += 1
